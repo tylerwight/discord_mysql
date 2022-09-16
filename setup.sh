@@ -1,4 +1,6 @@
 #!/bin/bash
+#Tyler WIght
+# setup environment to run discord mysql bot
 sudo apt install python3
 pip install discord
 pip install python-dotenv
@@ -27,6 +29,7 @@ sudo mysql -u root -e "CREATE DATABASE discord; use discord; CREATE TABLE accoun
 
 sudo mysql -u root -e "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'discord'@'localhost';"
 
+echo "the user discord has been created with the password 'password', please change this"
 
 
 
