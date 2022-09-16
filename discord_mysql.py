@@ -76,12 +76,18 @@ async def add_me(ctx):
 async def del_me(ctx):
     await ctx.send(f'I am trying to delete {ctx.author.name} from the DB')
     cursor.execute("SELECT * FROM accounts")
+    found = 0
     for x in cursor:
         for y in x:
+            print("printing Y")
+            print(y)
             if str(ctx.author.id) in y:
-                print("I did not find you in the DB, skipping")
-                break
+                found = found + 1
+    print(f'I found {found} matches')
 
+    if (found == 0):
+        await ctx.send("I did not find you in the DB, skipping")
+        return
     sql = "DELETE FROM accounts WHERE account_id = {} limit 1".format(ctx.author.id)
     cursor.execute(sql)
     mydb.commit()
