@@ -23,7 +23,7 @@ mysql -u root -p  -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
 
 sudo mysql -u root -e "CREATE USER 'discord'@'localhost' IDENTIFIED BY 'password';"
 
-sudo mysql -u root -e "CREATE DATABASE discord; use discord; CREATE TABLE accounts (account_id int, name varchar(255));"
+sudo mysql -u root -e "CREATE DATABASE discord; use discord; CREATE TABLE accounts (account_id varchar(255), name varchar(255));"
 
 sudo mysql -u root -e "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'discord'@'localhost';"
 
