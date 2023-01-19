@@ -5,10 +5,12 @@ from dotenv import load_dotenv
 from random import randint
 import mysql.connector
 
+#dotenv to keep secrets out of public repo
 load_dotenv()
 sqluser = os.getenv('MYSQL_USER')
 sqlpass = os.getenv('MYSQL_PASS')
 
+#mysql auth
 mydb = mysql.connector.connect(
         host = "localhost",
         user = sqluser,
@@ -17,20 +19,6 @@ mydb = mysql.connector.connect(
 )
 
 cursor = mydb.cursor()
-#tables = []
-
-#cursor.execute("SELECT DATABASE()")
-#for x in cursor:
-#    db = x
-#cursor.execute("SHOW TABLES")
-#for x in cursor:
-#    tables.append(x)
-#strdb = ''
-#strdb = db[0]
-#strtables = ''
-#strtables = tables[0]
-#db = ''.join(db)
-#tables = ''.join(''.join(tup) for tup in tables)
 
 #====================
 #discord auth
@@ -41,12 +29,14 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!",intents=intents)
 
 
+#commands to be executed via discord message
 @bot.command(brief="add my account to the list")
 async def add_me(ctx):
     await ctx.send(f'I am trying to add {ctx.author.name} to the DB')
     duplicate = 0
     cursor.execute("SELECT * FROM accounts")
     sql_out = []
+    #check for duplicate user
     for x in cursor:
         for y in x:
             if str(ctx.author.id) in y:
